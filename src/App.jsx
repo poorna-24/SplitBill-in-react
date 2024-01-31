@@ -5,13 +5,13 @@ const initialFriends = [
     id: 118836,
     name: "Chandu",
     image: "https://i.pravatar.cc/48?u=118836",
-    balance: -7,
+    balance: -70,
   },
   {
     id: 933372,
     name: "Bhavya",
     image: "https://i.pravatar.cc/48?u=933372",
-    balance: 20,
+    balance: 35,
   },
   {
     id: 499476,
@@ -28,7 +28,7 @@ const Button = ({ onclick, children }) => {
     </button>
   );
 };
-const App = () => {
+export default function App() {
   const [formData, setFormData] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
@@ -66,9 +66,7 @@ const App = () => {
       {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} onSplitBill={handleSplitBill} />}
     </div>
   );
-};
-
-export default App;
+}
 
 const FormFriend = ({ handleFormData }) => {
   const [name, setName] = useState("");
@@ -83,7 +81,7 @@ const FormFriend = ({ handleFormData }) => {
     setName("");
     setImage("https://i.pravatar.cc/48");
 
-    console.log(newvalues);
+    // console.log(newvalues);
   };
 
   return (
@@ -150,13 +148,13 @@ const FormSplitBill = ({ selectedFriend, onSplitBill }) => {
     <form className="form-split-bill" onSubmit={handleSubmit}>
       <h2>Split bill {selectedFriend.name}</h2>
       <label>💰 Bill value:</label>
-      <input type="text" value={bill} onChange={(e) => setBill(Number(e.target.value))} />
+      <input type="number" value={bill} onChange={(e) => setBill(Number(e.target.value))} />
 
       <label>🧑 Your expense</label>
-      <input type="text" value={paidByUser} onChange={(e) => setPaidByUser(Number(e.target.value) > bill ? paidByUser : Number(e.target.value))} />
+      <input type="number" value={paidByUser} onChange={(e) => setPaidByUser(Number(e.target.value) > bill ? paidByUser : Number(e.target.value))} />
 
       <label>💰 {selectedFriend.name}'s expense</label>
-      <input type="text" disabled value={paidByFriend} />
+      <input type="number" disabled value={paidByFriend} />
 
       <label>🤑 Who is paying the bill?</label>
       <select value={whoIsPaying} onChange={(e) => setwhoIsPaying(e.target.value)}>
